@@ -30,7 +30,7 @@ const store = new Vuex.Store({
           {
             id: 2,
             TakeName: '学习HTML',
-            isDelete: false,
+            isDelete: true,
             isDone: false,
             time: time.today
           },
@@ -38,7 +38,7 @@ const store = new Vuex.Store({
             id: 3,
             TakeName: '学习CSS',
             isDelete: false,
-            isDone: false,
+            isDone: true,
             time: time.today
           },
           {
@@ -78,7 +78,8 @@ const store = new Vuex.Store({
         colors: ["#2c7d59", "#3ba776"]
       }
     ],
-    currentIndex: 0
+    currentIndex: 0,
+    currentSelectTodo: {}
   },
   mutations: {
 
@@ -89,7 +90,25 @@ const store = new Vuex.Store({
     },
     CurrentIndexReduce(state) {
       state.currentIndex--
+    },
+    SelectTodo(state, id) {
+      state.currentSelectTodo = state.TaskList[id]
+    },
+    clearSelectTodo(state) {
+
+      state.currentSelectTodo = {}
+    },
+    isTackDone(state,todo){
+
+      todo.isDone = !todo.isDone
+
+    },
+    deletdTodo(state,todo){
+
+      todo.isDelete = true
+      // todo.isDone = false
     }
+
   },
   actions: {},
   modules: {}

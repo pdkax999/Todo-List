@@ -1,7 +1,9 @@
 <template>
   <div class="todoList-container" ref="todoContainer">
       <div class="todoList"  :style="{width:TaskData.length*100+'%'}">
-        <div class="todo-info" v-for="(todo,index) in TaskData" :key="index"  :style="{transform:currentIndex}">
+        <div class="todo-info" v-for="(todo,index) in TaskData" :key="index"  :style="{transform:currentIndex}"
+        @click="showTododetail(index)"
+        >
          <Todo  :todo="todo"/>
         </div>
       </div>
@@ -10,7 +12,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue} from 'vue-property-decorator';
+import { Component, Vue, Emit} from 'vue-property-decorator';
 import Todo from '@/components/Todo.vue';
 
 @Component({
@@ -32,6 +34,17 @@ export default class TodoList extends Vue {
      
     return 'translateX('+-this.$store.state.currentIndex*100+'%)'
   }
+  
+  @Emit('click')
+  showTododetail(id:string){
+
+     
+      
+
+    this.$store.commit('SelectTodo',id)
+    
+  }
+
   mounted(){
   
   let container: HTMLElement =(<any>this.$refs).todoContainer
@@ -41,9 +54,12 @@ export default class TodoList extends Vue {
    container.addEventListener('touchstart',(event)=>{
      
      this.touch.startTouch=event.touches[0].clientX
-     
-   
+
+    //  event.preventDefault()  
+  //  event.stopPropagation();
+  // event.stopPropagation()
   })
+
    container.addEventListener('touchend',(event)=>{
      
      this.touch.endTouch=event.changedTouches[0].clientX
@@ -72,7 +88,7 @@ export default class TodoList extends Vue {
 
       }
 
-     
+    //  event.stopPropagation()
   })
   
     

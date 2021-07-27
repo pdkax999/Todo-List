@@ -12,7 +12,7 @@
         </p>
       </div>
       <div class="date">
-        <span>日期 :</span>
+        <span>日期 : </span>
         <span>{{ timeobj.today | getTime}}</span>
       </div>
     </div>

@@ -2,10 +2,10 @@
   <div>
     <header>
       <div class="left">
-        <i></i>
+        <slot name="left"></slot>
       </div>
       <div class="center">
-        <span>Todo</span>
+        <span>{{Title}}</span>
       </div>
       <div class="right">
         <i></i>
@@ -15,11 +15,15 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
+import { Component, Vue, Prop } from "vue-property-decorator";
 
 @Component
 export default class App extends Vue {
+  @Prop({ type: String }) Title?: string;
 
+  mounted() {
+    //  console.log(this.Title);
+  }
 }
 </script>
 <style lang="less">
@@ -43,6 +47,13 @@ header {
       font-size: 20px;
       font-weight: bold;
     }
+  }
+
+  .left {
+    font-size: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 }
 </style>

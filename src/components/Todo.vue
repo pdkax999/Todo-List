@@ -1,6 +1,6 @@
 <template>
-  <div class="todo">
-    <div class="icon">
+  <div class="todo" :class="{todobg:todoSelectdata}">
+    <div class="icon" :class="{todoDetail: !todoSelectdata}">
       <div>
         <i :class="`fa fa-${todo.icon}`" :style="{color:todo.colors[0]}"></i>
       </div>
@@ -17,40 +17,62 @@
 
     <div class="progress">
       <div class="bar">
-        <span></span>
+        <span :style="{width:progressLength,background:todo.colors[0]}"></span>
       </div>
-      <span>0%</span>
+      <span>{{progressLength}}</span>
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue, Prop } from "vue-property-decorator";
-@Component
+@Component({
+  name: "Todo"
+})
 export default class App extends Vue {
   @Prop(Object) todo!: Object;
 
-  mouted(){
+  get todoSelectdata() {
+    return Object.keys(this.$store.state.currentSelectTodo).length == 0;
+  }
 
-    console.log(this.todo);
-    
+  get progressLength() {
+    let doneTask = this.todo.todoList.filter(todo => {
+      return todo.isDone&& !todo.isDelete;
+    });
 
+    let done = doneTask.length;
+
+    let total=this.todo.todoList.filter(todo=>{
+
+      return !todo.isDelete
+    })
+
+    if(total.length==0){
+      return '0%'
+    }
+
+    let result = Math.floor(done / total.length*100)+'%'
+
+    return result;
+  }
+
+  mounted() {
+    console.log(this.progressLength);
   }
 }
 </script>
-
 <style lang="less">
 .todo {
   width: 100%;
   height: 100%;
   border-radius: 7px;
   padding: 5%;
-  background-color: #eeeeee;
 
   .icon {
     width: 100%;
     height: 44px;
-    margin-bottom: 100px;
+    margin-bottom: 90px;
     & > div {
       width: 44px;
       height: 44px;
@@ -65,8 +87,6 @@ export default class App extends Vue {
         font-size: 20px;
       }
     }
-
-    
   }
 
   .todo-detail {
@@ -103,8 +123,8 @@ export default class App extends Vue {
         left: 0;
         right: 0;
         bottom: 0;
-        margin: auto;
         width: 0;
+        transition: width 1s;
         background-color: #aaaaaa;
       }
     }
@@ -114,8 +134,11 @@ export default class App extends Vue {
     }
   }
 
-  .todoDetail{
-      margin-bottom: 30px !important;
-    }
+  .todoDetail {
+    margin-bottom: 30px !important;
+  }
+}
+.todobg {
+  background-color: #eeeeee !important;
 }
 </style>
