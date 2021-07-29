@@ -94,7 +94,7 @@ export default class App extends Vue {
 
 <style lang="less">
 .center-x {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
@@ -109,6 +109,7 @@ export default class App extends Vue {
 }
 
 .detail-todo {
+  z-index: 5;
   background-color: #f5f5f5;
   .center-x();
   .todo-wapper {

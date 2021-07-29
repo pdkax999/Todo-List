@@ -1,11 +1,11 @@
 <template>
   <div>
     <header>
-      <div class="left">
+      <div class="left" >
         <slot name="left"></slot>
       </div>
       <div class="center">
-        <span>{{Title}}</span>
+        <span :class="{addTask:Title=='新建任务'}">{{Title}}</span>
       </div>
       <div class="right">
         <i></i>
@@ -21,9 +21,7 @@ import { Component, Vue, Prop } from "vue-property-decorator";
 export default class App extends Vue {
   @Prop({ type: String }) Title?: string;
 
-  mounted() {
-    //  console.log(this.Title);
-  }
+ 
 }
 </script>
 <style lang="less">
@@ -46,6 +44,10 @@ header {
     span {
       font-size: 20px;
       font-weight: bold;
+      &.addTask{
+        font-size: 17px;
+        color: black;
+      }
     }
   }
 

@@ -57,9 +57,7 @@ export default class App extends Vue {
     return result;
   }
 
-  mounted() {
-    console.log(this.progressLength);
-  }
+ 
 }
 </script>
 <style lang="less">

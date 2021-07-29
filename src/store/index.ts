@@ -98,17 +98,21 @@ const store = new Vuex.Store({
 
       state.currentSelectTodo = {}
     },
-    isTackDone(state,todo){
+    isTackDone(state, todo) {
 
       todo.isDone = !todo.isDone
 
     },
-    deletdTodo(state,todo){
+    deletdTodo(state, todo) {
 
       todo.isDelete = true
       // todo.isDone = false
-    }
+    },
+    updateTodoList(state, todo) {
 
+      state.currentSelectTodo.todoList.unshift(todo)
+
+    }
   },
   actions: {},
   modules: {}

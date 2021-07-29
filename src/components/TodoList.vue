@@ -19,13 +19,10 @@ import Todo from '@/components/Todo.vue';
   components: {
     Todo,
   },
-
-
-
 })
+
 export default class TodoList extends Vue {
   touch: any;
-
   get TaskData(){
    return this.$store.state.TaskList
   }
@@ -37,9 +34,6 @@ export default class TodoList extends Vue {
   
   @Emit('click')
   showTododetail(id:string){
-
-     
-      
 
     this.$store.commit('SelectTodo',id)
     

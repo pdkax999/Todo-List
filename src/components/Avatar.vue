@@ -12,7 +12,7 @@
         </p>
       </div>
       <div class="date">
-        <span>日期 : </span>
+        <span>日期 :</span>
         <span>{{ timeobj.today | getTime}}</span>
       </div>
     </div>
@@ -33,18 +33,13 @@ import time from "@/store/data.ts";
 })
 export default class Avatar extends Vue {
   timeobj: Object = time;
-
   get StayTasks() {
-   
-    
-   return  this.$store.state.TaskList.reduce((pre: number, todo: object) => {
-      let result= todo.todoList.filter((item)=>{
-        return !item.isDone
-      }).length
-
-     return  pre+=result
-      
-    }, 0)
+    return this.$store.state.TaskList.reduce((pre: number, todo: object) => {
+      let result = todo.todoList.filter(item => {
+        return !item.isDone && item.time !== time.tomorrow;
+      }).length;
+      return (pre += result);
+    }, 0);
   }
 }
 </script>
@@ -61,6 +56,7 @@ export default class Avatar extends Vue {
       height: $width;
       display: block;
       border-radius: 50%;
+      box-shadow: 6px 6px 10px rgba(0, 0, 0, 0.3);
     }
   }
 
