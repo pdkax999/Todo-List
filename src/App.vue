@@ -24,10 +24,5 @@ export default class App extends Vue {
 </script>
 
 <style lang="less">
-.box{
-  width: 50%;
-  height: 50px;
-  background-color: red;
-}
 
 </style>

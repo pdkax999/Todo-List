@@ -8,7 +8,8 @@
         <h3 class="title">您好,未闻</h3>
         <p>
           <span>今天天气不错</span>
-          <span>你今天有 {{StayTasks}} 个任务需要完成</span>
+          <span v-if="StayTasks>0">你今天有 {{StayTasks}} 个任务需要完成</span>
+          <span v-else>你今天没有任务需要完成</span>
         </p>
       </div>
       <div class="date">
@@ -36,9 +37,10 @@ export default class Avatar extends Vue {
   get StayTasks() {
     return this.$store.state.TaskList.reduce((pre: number, todo: object) => {
       let result = todo.todoList.filter(item => {
-        return !item.isDone && item.time !== time.tomorrow;
-      }).length;
-      return (pre += result);
+        return !item.isDone && item.time !== time.tomorrow && !item.isDelete
+      })
+
+      return (pre += result.length);
     }, 0);
   }
 }

@@ -15,7 +15,7 @@ const store = new Vuex.Store({
         todoList: [
           {
             id: 1,
-            TakeName: '不付初心',
+            TakeName: 'qu yue',
             isDelete: false,
             isDone: false,
             time: time.today
@@ -91,8 +91,8 @@ const store = new Vuex.Store({
     CurrentIndexReduce(state) {
       state.currentIndex--
     },
-    SelectTodo(state, id) {
-      state.currentSelectTodo = state.TaskList[id]
+    SelectTodo(state, todo) {
+      state.currentSelectTodo =todo
     },
     clearSelectTodo(state) {
 

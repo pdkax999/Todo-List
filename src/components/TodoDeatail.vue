@@ -86,7 +86,6 @@ export default class App extends Vue {
 
   closeDetail() {
     this.$parent.toggleDetailShow();
-
     this.$store.commit("clearSelectTodo");
   }
 }

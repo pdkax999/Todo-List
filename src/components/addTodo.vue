@@ -3,7 +3,7 @@
     <div id="AddTodo" class="newTodo" @click="closeTime">
       <Head Title="新建任务">
         <template v-slot:left>
-          <i class="fa fa-times" @click="closeCall"></i>
+          <i class="fa fa-times" @click="closeAddTodo"></i>
         </template>
       </Head>
       <div class="todoInput">
@@ -52,6 +52,12 @@ export default class App extends Vue {
   selectTime($e) {
     this.selectTimeText = $e.target.innerHTML;
   }
+  //关闭当前页面
+  closeAddTodo(){
+     this.closeCall()
+    this.selectTimeText = "今天";
+    this.todoTitle = "";
+  }
 
   todoAdd() {
     const { todoTitle, selectTimeText } = this;
@@ -68,9 +74,7 @@ export default class App extends Vue {
 
     this.$store.commit("updateTodoList", todo);
 
-    this.$parent.toggleAddShow();
-    this.selectTimeText = "";
-    this.todoTitle = "";
+    this.closeAddTodo()
   }
 
   mounted() {

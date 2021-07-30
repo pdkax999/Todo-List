@@ -1,3 +1,4 @@
+<!--背景原理:通过遍历生成三个背景div全部opcity隐藏,通过当前选中todo动态匹配背景,并添加过渡 1 - 0 - 1 -->
 <template>
   <div class="bg">
     <div
@@ -17,11 +18,9 @@ export default class App extends Vue {
   get TaskData() {
     return this.$store.state.TaskList;
   }
-
   get currentIndex() {
     return this.$store.state.currentIndex;
   }
-
   gradient(index: string) {
     return `linear-gradient(${this.TaskData[index].colors[1]}, ${this.TaskData[index].colors[0]})`;
   }
@@ -37,7 +36,7 @@ export default class App extends Vue {
   right: 0;
   margin: auto;
   z-index: -1;
-  
+
 
   .todoBg {
     position: absolute;

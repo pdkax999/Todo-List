@@ -1,5 +1,5 @@
 const px2rem = require('postcss-px2rem');
-const path = require('path');
+
 
 module.exports = {
   lintOnSave: false,
@@ -14,5 +14,5 @@ module.exports = {
       },
     },
   },
-
+  publicPath: './'
 };
